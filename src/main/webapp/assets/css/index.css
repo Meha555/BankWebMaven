@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: url(../images/index_bg.jpg) center 0 no-repeat fixed;
+    background-size: cover;
+}
+
+a {
+    font-family: "宋体";
+    margin: auto;
+}
+
+a:link {
+    color: black;
+    text-decoration: none;
+}
+
+a:visited {
+    color: purple;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: blue;
+    text-decoration: underline;
+}
+
+a:active {
+    color: orange;
+}
+
+#nav {
+    height: 55px;
+    background-color: white;
+    border-top: 5px solid orange;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+}
+
+#nav a {
+    font-family: "微软雅黑";
+    font-size: 20px;
+    padding: 0 20px;
+    height: 40px;
+    line-height: 50px;
+}
+
+#nav a:link {
+    color: black;
+    text-decoration: none;
+}
+
+#nav a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+#nav a:hover {
+    color: orangered;
+    font-size: 135%;
+    text-decoration: none;
+}
+
+#nav a:active {
+    color: skyblue;
+    text-decoration: none;
+}
+
+#main {
+    font-family: "华文楷体";
+    width: 400px;
+    height: 250px;
+    margin: 100px;
+    padding: 20px 15px;
+}
+
+#footer {
+    text-align: center;
+    height: 60px;
+    width: auto;
+    color: white;
+    background-color: midnightblue;
+    padding: 60px 100px;
+    margin: 0 auto;
+    font-size: 20px;
+    font-family: "宋体";
+}
+
+.xuxian {
+    padding-top: 10px;
+    border: 0;
+    border-bottom: 1px dashed;
+}
+
+#main li {
+    list-style: none;
+    height: 38px;
+    line-height: 40px;
+    text-indent: 2em;
+    /*缩进*/
+    border-bottom: 2px dashed gray;
+}
+
+#footer li {
+    list-style: none;
+    line-height: 30px;
+}
+
+.header {
+    margin: 0px 30px;
+    font-family: "华文中宋";
+    color: purple;
+    font-size: 25px;
+    padding: 0 10px;
+    height: 40px;
+    line-height: 50px;
+}
+
+.left {
+    float: left;
+    display: inline;
+}
+
+.right {
+    float: right;
+    display: inline;
+}

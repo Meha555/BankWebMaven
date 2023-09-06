@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>登录/注册</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            background: #006666;
+        }
+
+        h1 {
+            color: #FFF;
+            text-align: center;
+        }
+
+        .container {
+            margin: 100px auto;
+            padding: 0px;
+            height: 210px;
+            width: 400px;
+            text-align: center;
+        }
+
+        form {
+            background: #FFF;
+            height: 100%;
+            width: 90%;
+            border-radius: 10px;
+            margin: 0px;
+            padding: 20px;
+        }
+
+        label {
+            color: #000;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        input {
+            text-align: left;
+            margin: 10px;
+        }
+
+        .inputarea {
+            width: 70%;
+            height: 35px;
+        }
+
+        .btn {
+            background: #000;
+            border: none;
+            color: #FFF;
+            height: 40px;
+            width: 120px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .left {
+            float: left;
+            margin-left: 20px;
+        }
+
+        .right {
+            float: right;
+            margin-right: 20px;
+        }
+        #account_err, #pwd_err {
+            color: red;
+            font-size: smaller;
+            float: right;
+            margin: 0px 30px;
+            padding: 0px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <h1>登&nbsp&nbsp录/注&nbsp&nbsp册</h1>
+    <form action="CustomerServlet/logregCustomer" method="post" onsubmit="return subcheck();"><!--注意action不要写成/CustomerServlet/loginCustomer-->
+        <div>
+            <label for="account">账号</label>
+            <input type="text" name="account" id="account" class="inputarea" value="" placeholder="19位卡号/admin" required>
+            <br><span id="account_err"></span>
+        </div>
+        <br>
+        <div>
+            <label for="pwd">密码</label>
+            <input type="password" name="pwd" id="pwd" class="inputarea" value="" placeholder="不超过10个字符"
+                   maxlength="10" onblur="checkpwd()" required>
+            <br><span id="pwd_err"></span>
+        </div>
+        <br>
+        <div class="left"><!--left-->
+            <input type="submit" id="log" class="btn left" name="subbtn" value="登录" /><!--left-->
+        </div>
+        <div class="right">
+            <input type="submit" id="reg" class="btn right" name="subbtn" value="注册" />
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    document.getElementById("account").onblur = function () {
+        let account = document.getElementById("account").value;
+        var xmlhttp1;
+        if (window.XMLHttpRequest) {
+            xmlhttp1 = new XMLHttpRequest();
+        } else {
+            xmlhttp1 = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        //建立连接
+        xmlhttp1.open("POST", "CustomerServlet/accountCheck?account="+account);
+        //写全路径，因为是浏览器发出的请求，可能打开的不是项目内的文件
+        //发送请求
+        xmlhttp1.send();
+        xmlhttp1.onreadystatechange = function() {
+            if (xmlhttp1.readyState == 4 && xmlhttp1.status == 200) {
+                console.log(xmlhttp1.responseText);//***************************
+                if(xmlhttp1.responseText == "false"){
+                    document.getElementById("account_err").innerHTML="账号不存在";
+                    //document.getElementById("log").style.display = '';
+                }
+                else{
+                    document.getElementById("account_err").innerHTML="账号存在";
+                    //document.getElementById("log").style.display = 'none';
+                }
+            }
+        }
+    }
+    var regexp_account = new RegExp("^\\d{19}$");//校验密码的正则表达式，19位数字
+    var regexp_pwd = new RegExp("^[a-zA-Z]\\w{4,9}$");//校验密码的正则表达式，只能以字母开头，长度在5~10之间，只能包含字母、数字和下划线
+    var account=document.getElementById("account");
+    var pwd=document.getElementById("pwd");
+    account.onblur=checkID;
+    pwd.onblur=checkPWD;
+    function checkID(){
+        let flag;
+        if(account.value==""){
+            document.getElementById("account_err").innerHTML="账号不能为空";
+            flag=false;
+        }
+        else{
+            document.getElementById("account_err").innerHTML="";
+            flag=true;
+        }
+        if(!(regexp_account.test(account.value.trim()))){
+            document.getElementById("account_err").innerHTML="卡号为19位数字/不能注册管理员";
+            flag=false;
+        }
+        else{
+            document.getElementById("account_err").innerHTML="";
+            flag=true;
+        }
+        return flag;
+    }
+    function checkPWD(){
+        let flag;
+        if(pwd.value==""){
+            document.getElementById("pwd_err").innerHTML="密码不能为空";
+            flag=false;
+        }
+        else{
+            document.getElementById("pwd_err").innerHTML="";
+            flag=true;
+        }
+        if(!(regexp_pwd.test(pwd.value.trim()))){
+            document.getElementById("pwd_err").innerHTML="密码由5~10位字母数字下划线组成";
+            flag=false;
+        }
+        else{
+            document.getElementById("pwd_err").innerHTML="";
+            flag=true;
+        }
+        return flag;
+    }
+    function subcheck(){
+        let flag=checkID()&&checkPWD();
+        document.getElementById("log").value="Login";
+        document.getElementById("reg").value="Register";
+        return flag;
+    }
+</script>
+</body>
+
+</html>
