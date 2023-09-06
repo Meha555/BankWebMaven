@@ -4,6 +4,11 @@
 
 使用Java Web开发技术栈开发的一个银行叫号系统，前端使用HTML、AJAX、JavaScript、JSP，后端使用Java语言和MySQL数据库。
 
+### 开发环境
+
+- JDK 1.8
+- IDEA 2021
+
 ## 需求分析
 
 （一）功能需求
